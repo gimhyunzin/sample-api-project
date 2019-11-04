@@ -48,6 +48,8 @@ public class SampleController {
 //        );
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
     @RequestMapping(path = "/hello")
     public @ResponseBody String sayHello() {
         log.info("GET called on /hello resource");

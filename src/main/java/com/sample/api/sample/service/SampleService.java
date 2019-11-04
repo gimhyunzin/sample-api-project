@@ -1,14 +1,15 @@
 package com.sample.api.sample.service;
 
-import com.sample.api.sample.domain.SampleType;
 import com.sample.api.sample.domain.Navigation;
 import com.sample.api.sample.domain.Purchase;
 import com.sample.api.sample.domain.SampleHeaders;
+import com.sample.api.sample.domain.SampleType;
 import com.sample.api.sample.domain.response.SampleResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
 
 @Slf4j
 @Service

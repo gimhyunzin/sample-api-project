@@ -17,15 +17,7 @@ import java.util.stream.Stream;
 @RestController
 public class LbStatusController {
 
-    /**
-     * 시스템팀에서 배포할 때 L4에서 이 url을 호출하여 특정 위치에 있는 파일을 읽어들여 그 값을 리턴받아 L4에서 넣었다 뺐다 할 수 있도록 제공하는 메소드입니다
-     *
-     * 결과 체크는 http status 를 확인하지 않고 response body 만을 체크하고 있음.
-     *
-     * @return 시스템팀에서 편집한 파일의 내용
-     */
-    @ApiOperation(value = "lbStatusCheck Controller", notes = "시스템팀에서 배포할 때 L4에서 이 url을 호출하여 특정 위치에 있는 파일을 읽어들여, " +
-            "그 값을 리턴받아 L4에서 넣었다 뺐다 할 수 있도록 제공하는 메소드입니다")
+    @ApiOperation(value = "LbStatusCheck Controller")
     @GetMapping("/lbStatusCheck")
     public ResponseEntity<String> getLbStatusCheck() {
         String lbStatusFilePath = System.getProperty("file.path.lbstatus");

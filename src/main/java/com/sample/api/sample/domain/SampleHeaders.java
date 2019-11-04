@@ -1,6 +1,7 @@
 package com.sample.api.sample.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.sample.api.common.domain.SampleHeaderKey;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 @AllArgsConstructor(staticName = "of")
 @Data
@@ -51,7 +53,7 @@ public class SampleHeaders {
         httpHeaders.set(SampleHeaderKey.NON_USER_INFO, headers.getNonUser());
         httpHeaders.set(SampleHeaderKey.NON_USER_MID, headers.getNonMid());
         httpHeaders.set(SampleHeaderKey.USER_AGENT_TYPE, headers.getUserAgent());
-        httpHeaders.setContentType(new MediaType(MediaType.APPLICATION_JSON_UTF8, Charset.forName("UTF-8")));
+        httpHeaders.setContentType(new MediaType(MediaType.APPLICATION_JSON_UTF8, StandardCharsets.UTF_8));
 
         return httpHeaders;
     }

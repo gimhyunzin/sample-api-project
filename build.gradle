@@ -1,18 +1,8 @@
-// build script 라이브러리 클래스패스 추가.
 buildscript {
     ext {
-        // 해당 API 의 domain name - nexus upload 시 group 의 com.sample.{domainName} 으로 등록됨.
-//        domainName = "api.sample"
-        // 해당 API에서 사용하는 Library 버전.
-//        projectLibraryVersion = "0.0.1-RELEASE"
-        // green-framework include 버전 정의.
-//        greenFrameworkVersion = "1.0.1-RELEASE"
-//        greenFrameworkVersion = "0.3.23-SNAPSHOT"
-        // springBoot 버전 정의.
+        domainName = "api.sample"
         springBootVersion = "1.5.2.RELEASE"
-        // java version
         javaVersion = 1.8
-        //spring cloud
         cloudVersion = "Dalston.SR4"
     }
     repositories {
@@ -36,19 +26,9 @@ apply plugin: "war"
 apply plugin: "maven"
 apply plugin: "maven-publish"
 
-allprojects {
-//    group "com.sample.${domainName}"
-    idea {
-        module {
-            inheritOutputDirs = true
-        }
-    }
-}
-
 sourceCompatibility = "${javaVersion}"
 targetCompatibility = "${javaVersion}"
 
-// compile encoding 설정.
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
@@ -58,18 +38,15 @@ configurations {
 }
 
 configurations.all {
-    // 변하는 모듈(Changing Module)을 캐시하지 않음
     resolutionStrategy.cacheChangingModulesFor 0, "seconds"
 }
 
-//cloud - kafka dependency
 dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${cloudVersion}"
     }
 }
 
-// 공통 dependency 정의.
 dependencies {
     compileOnly("org.projectlombok:lombok:1.18.6")
     compileOnly("com.fasterxml.jackson.core:jackson-databind:2.8.7")
@@ -85,8 +62,7 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
-    // lucy
-    compile("com.navercorp.lucy:lucy-xss-servlet:2.0.0")
+    compile("org.apache.commons:commons-lang3:3.1")
 
     // swagger
     compile("io.springfox:springfox-swagger-ui:2.8.0")
@@ -96,11 +72,9 @@ dependencies {
     compile("org.apache.kafka:kafka-clients:0.10.1.1")
     compile("org.springframework.cloud:spring-cloud-starter-sleuth")
     compile("org.springframework.cloud:spring-cloud-starter-zipkin")
-//    compile("com.github.danielwegener:logback-kafka-appender:0.1.0")
 }
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 

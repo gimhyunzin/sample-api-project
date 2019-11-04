@@ -5,11 +5,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-/**
- * servlet context 설정을 위한 config
- *
- * @author Jeonyeochul
- */
 @Configuration
 public class ServletConfig extends WebMvcConfigurerAdapter {
 
@@ -17,7 +12,7 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS  = {"classpath:/META-INF/resources/", "classpath:/META-INF/resources/webjars/"};
 
     /**
-     * mvc:resources 설정을 처리합니다.
+     * mvc:resources 설정
      *
      * @param registry ResourceHandlerRegistry
      */
@@ -27,7 +22,7 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * "/" path로 진입시 swagger-ui.html로 리다이렉트 처리합니다.
+     * "/" 진입 시, swagger-ui.html 리다이렉트
      *
      * @param registry ViewControllerRegistry
      */

@@ -1,4 +1,4 @@
-package com.sample.api.sample.domain;
+package com.sample.api.common.domain;
 
 /**
  * Created by hjk
