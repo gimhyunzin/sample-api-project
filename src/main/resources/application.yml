@@ -6,7 +6,7 @@ server:
 
 spring:
   application:
-    name: orderlist-composite-api
+    name: sample-api
   profiles:
     active: local # default profile
   # 404 not found settings

@@ -1,4 +1,4 @@
 spring:
   zipkin:
     service:
-      name: orderlist-composite-api
+      name: sample-api
