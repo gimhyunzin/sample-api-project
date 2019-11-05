@@ -58,12 +58,17 @@ security:
 spring:
   profiles: local
 
-green:
-  resource-routes:
-    ship:
-      url: http://localhost:8080
-    live:
-      url: http://localhost:8080
+  datasource:
+    url: jdbc:mysql://localhost:3306/TEST?autoReconnect=true&useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: test
+    password: test123!@#
+    validation-query: select 1
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # 운영시에는 validate 추천
+    show-sql: true
 
 resources:
   uri:
@@ -76,14 +81,6 @@ resources:
 spring:
   profiles: dev
 
-
-green:
-  resource-routes:
-    ship:
-      url: http://shipping-api-dev.sample.com:8080
-    live:
-      url: http://liveorderlist-api-dev.sample.com:8080
-
 resources:
   uri:
     ship:
@@ -94,16 +91,6 @@ resources:
 ---
 spring:
   profiles: qa
-
-
-
-green:
-  resource-routes:
-    ship:
-      url: http://shipping-api-qa.sample.com:8080
-    live:
-      url: http://liveorderlist-api-qa.sample.com:8080
-
 
 resources:
   uri:
@@ -125,15 +112,6 @@ security:
 spring:
   profiles: stg
 
-
-green:
-  resource-routes:
-    ship:
-      url: http://shipping-api-stg.sample.com:8080
-    live:
-      url: http://liveorderlist-api-stg.sample.com:8080
-
-
 resources:
   uri:
     ship:
@@ -153,14 +131,6 @@ security:
 ---
 spring:
   profiles: prod
-
-
-green:
-  resource-routes:
-    ship:
-      url: http://shipping-api.sample.com:8080
-    live:
-      url: http://liveorderlist-api.sample.com:8080
 
 resources:
   uri:

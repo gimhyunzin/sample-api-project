@@ -50,13 +50,13 @@ public class SampleController {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
-    @RequestMapping(path = "/hello")
+    @GetMapping(path = "/hello")
     public @ResponseBody String sayHello() {
         log.info("GET called on /hello resource");
         return "Hello from Spring Boot Backend!";
     }
 
-    @RequestMapping(path = "/user", method = RequestMethod.POST)
+    @PostMapping(path = "/user")
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody long addNewUser (@RequestParam String firstName, @RequestParam String lastName) {
         Sample sample = new Sample(firstName, lastName);

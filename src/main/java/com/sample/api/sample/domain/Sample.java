@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "SAMPLE")
 @Getter
 @ApiModel(description = "샘플 정보")
 public class Sample {
