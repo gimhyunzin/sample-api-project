@@ -5,7 +5,9 @@ import com.sample.api.sample.domain.Purchase;
 import com.sample.api.sample.domain.SampleHeaders;
 import com.sample.api.sample.domain.SampleType;
 import com.sample.api.sample.domain.response.SampleResponse;
+import com.sample.api.sample.repository.SampleRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -14,6 +16,9 @@ import java.util.List;
 @Slf4j
 @Service
 public class SampleService {
+
+    @Autowired
+    private SampleRepository sampleRepository;
 
     /**
      * 주문리스트 통합
