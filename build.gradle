@@ -1,82 +1,62 @@
-buildscript {
-    ext {
-        domainName = "api.sample"
-        springBootVersion = "1.5.2.RELEASE"
-        javaVersion = 1.8
-        cloudVersion = "Dalston.SR4"
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5")
-    }
+plugins {
+    id 'org.springframework.boot' version '2.2.1.RELEASE'
+    id 'java'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = "3.1"
-    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
-}
+apply plugin: 'io.spring.dependency-management'
 
-apply plugin: "java"
-apply plugin: "idea"
-apply plugin: "org.springframework.boot"
-apply plugin: "war"
-apply plugin: "maven"
-apply plugin: "maven-publish"
-
-sourceCompatibility = "${javaVersion}"
-targetCompatibility = "${javaVersion}"
-
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
+group = 'com.kakaopay.jupiter'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
 
 configurations {
-    providedRuntime
-}
-
-configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 0, "seconds"
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${cloudVersion}"
+    compileOnly {
+        extendsFrom annotationProcessor
     }
-}
-
-dependencies {
-    compileOnly("org.projectlombok:lombok:1.18.6")
-    compileOnly("com.fasterxml.jackson.core:jackson-databind:2.8.7")
-
-    compile("org.springframework.boot:spring-boot-starter-actuator")
-    compile("org.springframework.boot:spring-boot-starter-security")
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-aop")
-    compile("org.springframework.boot:spring-boot-devtools")
-
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("mysql:mysql-connector-java:8.0.11")
-
-    compileOnly("org.springframework.boot:spring-boot-configuration-processor")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
-
-    compile("org.apache.commons:commons-lang3:3.1")
-
-    // swagger
-    compile("io.springfox:springfox-swagger-ui:2.8.0")
-    compile("io.springfox:springfox-swagger2:2.8.0")
-
-    //kafka
-    compile("org.apache.kafka:kafka-clients:0.10.1.1")
-    compile("org.springframework.cloud:spring-cloud-starter-sleuth")
-    compile("org.springframework.cloud:spring-cloud-starter-zipkin")
 }
 
 repositories {
     mavenCentral()
+
+    maven { url "http://maven.daumcorp.com/content/repositories/daumkakao-fintech" }
+    maven { url "http://maven.daumcorp.com/content/repositories/daumkakao-fintech-snapshots" }
 }
 
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'mysql:mysql-connector-java'
+
+    compile 'org.apache.commons:commons-lang3:3.9'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // swagger
+    // by - https://github.com/springfox/springfox/issues/2265
+    compile("io.springfox:springfox-swagger-ui:2.9.2")
+    compile("io.springfox:springfox-swagger2:2.9.2") {
+        exclude module: 'swagger-annotations'
+        exclude module: 'swagger-models'
+    }
+    compile("io.swagger:swagger-annotations:1.5.21")
+    compile("io.swagger:swagger-models:1.5.21")
+
+    // 계정 API - 테스트용 임시
+    compile 'com.kakao.pay:pay-account-client:0.7.9'
+
+    // kafka
+    // TODO: spring boot 2.X 미지원.. 선택의 기로...
+//    compile "org.apache.kafka:kafka-clients:0.10.1.1"
+//    compile "org.springframework.cloud:spring-cloud-starter-sleuth"
+//    compile "org.springframework.cloud:spring-cloud-starter-zipkin"
+}

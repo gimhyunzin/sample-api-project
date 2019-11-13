@@ -1,1 +1,1 @@
-sample-api
+jupiter-api

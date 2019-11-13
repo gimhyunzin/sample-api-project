@@ -55,7 +55,7 @@
 
     <!-- spring profiles 에 따른 로그 레벨 설정 (spring boot 에서만 설정 가능함.) -->
     <springProfile name="local">
-        <logger name="com.sample" level="DEBUG" />
+        <logger name="com.kakaopay.jupiter.api" level="DEBUG" />
 
         <!-- 정의 되지 않은 logger 들에게 일괄 적용됨 -->
         <root level="INFO">
@@ -65,8 +65,8 @@
         </root>
     </springProfile>
 
-    <springProfile name="dev">
-        <logger name="com.sample" level="DEBUG" />
+    <springProfile name="develop">
+        <logger name="com.kakaopay.jupiter.api" level="DEBUG" />
 
         <!-- 정의 되지 않은 logger 들에게 일괄 적용됨 -->
         <root level="INFO">
@@ -75,27 +75,8 @@
         </root>
     </springProfile>
 
-    <springProfile name="qa">
-        <logger name="com.sample" level="INFO" />
-
-        <!-- 정의 되지 않은 logger 들에게 일괄 적용됨 -->
-        <root level="INFO">
-            <appender-ref ref="FILE_APPENDER" />
-            <appender-ref ref="FILE_ERROR_APPENDER" />
-        </root>
-    </springProfile>
-
-    <springProfile name="stg">
-        <logger name="com.sample" level="INFO" />
-
-        <!-- 정의 되지 않은 logger 들에게 일괄 적용됨 -->
-        <root level="ERROR">
-            <appender-ref ref="FILE_ERROR_APPENDER" />
-        </root>
-    </springProfile>
-
-    <springProfile name="prod">
-        <logger name="com.sample" level="INFO" />
+    <springProfile name="production">
+        <logger name="com.kakaopay.jupiter.api" level="INFO" />
 
         <!-- 정의 되지 않은 logger 들에게 일괄 적용됨 -->
         <root level="ERROR">

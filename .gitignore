@@ -1,28 +1,29 @@
-# package files
-*.jar
-*.war
-*.ear
+HELP.md
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
 
-# maven
-target
-.mvn/
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-# intellij
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
-.idea/
-mvnw
-mvnw.cmd
+*.ipr
+/out/
 
-# gradle
-**/.gradle/
-**/build/
-**/classes/
-
-!gradle-wrapper.jar
-.gradletasknamecache
-
-
-LOG_PATH_IS_UNDEFINED/
-
-rename.sh
-init.sh
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/bin/
+/logs/
