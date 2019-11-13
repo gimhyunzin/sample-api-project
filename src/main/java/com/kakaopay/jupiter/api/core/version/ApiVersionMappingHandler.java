@@ -1,6 +1,5 @@
 package com.kakaopay.jupiter.api.core.version;
 
-import com.kakaopay.jupiter.api.config.ApiVersionConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.servlet.mvc.condition.*;
@@ -52,11 +51,7 @@ public class ApiVersionMappingHandler extends RequestMappingHandlerMapping {
 
         for (int i = 0; i < values.length; i++) {
             patterns[i] = apiPrefix + slash + versionPrefix + values[i];
-
-            // TODO
-            log.info("================= MAPPING:{} >>>> {}", i, apiPrefix + slash + versionPrefix + values[i]);
         }
-
 
         return new RequestMappingInfo(
                 new PatternsRequestCondition(patterns, getUrlPathHelper(), getPathMatcher(), useSuffixPatternMatch(), useTrailingSlashMatch(), getFileExtensions()),

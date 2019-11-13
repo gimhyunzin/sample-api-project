@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 @Setter
 @Getter
 public abstract class BaseResponse<T> {
-    protected HttpStatus status;
-    protected String message;
+    protected HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+    protected String message = "";
     protected T data;
 }

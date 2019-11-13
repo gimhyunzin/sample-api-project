@@ -58,13 +58,26 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update # 운영 시 validate
+      ddl-auto: update
     show-sql: true
+    open-in-view: true
 
 ---
 spring:
   profiles: develop
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: true
+
 ---
 spring:
   profiles: production
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false

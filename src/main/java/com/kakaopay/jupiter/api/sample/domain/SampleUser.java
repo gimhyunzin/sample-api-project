@@ -26,7 +26,7 @@ public class SampleUser {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @ApiModelProperty(notes = "나이")
-    private int age;
+    private Integer age;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @ApiModelProperty(notes = "생일")

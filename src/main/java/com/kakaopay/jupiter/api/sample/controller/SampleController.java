@@ -12,13 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @ApiResponses({
         @ApiResponse(code = 404, message = "Not Found"),
         @ApiResponse(code = 500, message = "Failure")
 })
 @Slf4j
 @RestController
-@Api(tags = "샘플")
+@Api(tags = "Jupiter 샘플")
 public class SampleController {
 
     @Autowired
@@ -31,7 +33,12 @@ public class SampleController {
             @ApiParam(value = "샘플 파라미터") SampleParams params
     ) {
         SampleUserListResponse res = new SampleUserListResponse();
-        res.setData(sampleService.getUserListByName(params));
+
+        List<SampleUser> userList = sampleService.getUserListByName(params);
+
+        res.setData(userList);
+        res.setMessage("조회 성공쓰");
+        res.setStatus(HttpStatus.OK);
 
         return res;
     }
@@ -43,7 +50,12 @@ public class SampleController {
             @ApiParam(value = "샘플 파라미터") SampleParams params
     ) {
         SampleUserListResponse res = new SampleUserListResponse();
-        res.setData(sampleService.getUserListByAge(params));
+
+        List<SampleUser> userList = sampleService.getUserListByAge(params);
+
+        res.setData(userList);
+        res.setMessage("조회 성공쓰");
+        res.setStatus(HttpStatus.OK);
 
         return res;
     }
@@ -52,19 +64,18 @@ public class SampleController {
     @PostMapping(path = "/user")
     @ResponseStatus(HttpStatus.CREATED)
     public SampleUserResponse addUser(
-            @ApiParam(value = "나이") int age,
-            @ApiParam(value = "이름") String name
+            @ApiParam(value = "샘플 파라미터") SampleParams params
     ) {
         SampleUserResponse res = new SampleUserResponse();
 
         SampleUser user = new SampleUser();
-        user.setAge(age);
-        user.setName(name);
+        user.setAge(params.getAge());
+        user.setName(params.getName());
 
         SampleUser saved = sampleService.saveUser(user);
 
         res.setData(saved);
-        res.setMessage("");
+        res.setMessage("등록 성공쓰");
         res.setStatus(HttpStatus.OK);
 
         return res;
@@ -76,7 +87,12 @@ public class SampleController {
             @ApiParam(value = "유저 id") @PathVariable("id") long id
     ) {
         SampleUserResponse res = new SampleUserResponse();
-        res.setData(sampleService.getUserById(id));
+
+        SampleUser user = sampleService.getUserById(id);
+
+        res.setData(user);
+        res.setMessage("조회 성공쓰");
+        res.setStatus(HttpStatus.OK);
 
         return res;
     }

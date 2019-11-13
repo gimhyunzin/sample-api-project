@@ -1,12 +1,13 @@
 package com.kakaopay.jupiter.api.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class ServletConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer {
 
     private static final String[] CLASSPATH_PATH_PATTERNS       = {"swagger-ui.html", "/webjars/**"};
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS  = {"classpath:/META-INF/resources/", "classpath:/META-INF/resources/webjars/"};
@@ -18,11 +19,17 @@ public class ServletConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addRedirectViewController("/", "redirect:/swagger-ui.html");
+        registry.addRedirectViewController("/", "/swagger-ui.html");
     }
 
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/*").allowedOrigins("http://localhost:8080");
-//    }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        // TODO : domain by profiles
+        registry.addMapping("/*").allowedOrigins("http://localhost:8080");
+//        .allowedMethods(
+//                HttpMethod.GET.name(),
+//                HttpMethod.POST.name(),
+//                HttpMethod.PUT.name()
+//        );
+    }
 }
